@@ -82,20 +82,30 @@ var keyHandler = function(event) {
 
 document.addEventListener("keydown", keyHandler, false);
 
+if (window.innerWidth > 648) {
 
-fetch("https://blog.clubelec.insset.fr/index.xml")
-    .then(response => response.text())
-    .then(xml => {
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(xml, "text/xml");
-        var rootElement = xmlDoc.documentElement;
-        var children = rootElement.childNodes;
-        for (var i = 0; i < children.length; i++) {
-            var child = children[i];
-            if (child.nodeType == Node.ELEMENT_NODE) {
-                document.getElementById("article-link").href = child.getElementsByTagName("link")[1].textContent;
-                document.getElementById("article-title").innerHTML = child.getElementsByTagName("title")[1].textContent;
-                document.getElementsByClassName("blog")[0].classList.add("active");
+    fetch("https://blog.clubelec.insset.fr/index.xml")
+        .then(response => response.text())
+        .then(xml => {
+
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(xml, "text/xml");
+            var rootElement = xmlDoc.documentElement;
+            var children = rootElement.childNodes;
+
+            for (var i = 0; i < children.length; i++) {
+
+                var child = children[i];
+
+                if (child.nodeType == Node.ELEMENT_NODE) {
+
+                    document.getElementById("article-link").href = child.getElementsByTagName("link")[1].textContent;
+                    document.getElementById("article-title").innerHTML = child.getElementsByTagName("title")[1].textContent;
+                    document.getElementsByClassName("blog")[0].classList.add("active");
+
+                }
+
             }
-        }
-    })
+        })
+
+}
