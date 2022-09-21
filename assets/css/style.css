@@ -57,7 +57,7 @@ header {
     stroke: #1e1f1d;
 }
 
-header svg g {
+header svg path {
     transition: all ease-in 0.2s;
 }
 
